@@ -14,5 +14,6 @@ class Places_of_Interest extends Model
         'description',
         'long',
         'lat',
+        'is_public',
     ];
 }

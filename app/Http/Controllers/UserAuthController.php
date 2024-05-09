@@ -72,4 +72,30 @@ class UserAuthController extends Controller
             'message' => 'Credenciales no válidas',
         ], 401);
     }
+
+    public function updateadmin(Request $request, $id)
+{
+    try {
+        $user = User::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'role' => 'required',
+            
+        ]);
+        $user->role = $validatedData['role'];
+        $user->save();  
+
+        return response()->json([
+            'status' => 'ok',
+            'message' => 'Usuario actualizado correctamente',
+        ], 200);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Error al actualizar el usuario',
+            'error' => $e->getMessage(),
+        ], 500);
+    }
+}
+
 }

@@ -22,8 +22,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::post('/register', [UserAuthController::class, 'register']);
 Route::post('/login', [UserAuthController::class, 'login']);
+Route::put('/user/{id}', [UserAuthController::class, 'updateadmin']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/getUserPoints', [PlacesofInterestController::class, 'getUserPoints']);
     Route::post('/crearPunto', [PlacesofInterestController::class, 'createPoint']);
+    Route::delete('/places_of_interests/{id}', [PlacesofInterestController::class, 'deletePoint']);
+    Route::put('/places_of_interests/{id}', [PlacesofInterestController::class, 'updatePoint']);
+
 });
