@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\PlacesofInterestController;
 
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -16,7 +15,6 @@ use App\Http\Controllers\PlacesofInterestController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
