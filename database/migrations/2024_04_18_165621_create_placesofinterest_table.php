@@ -20,6 +20,7 @@ return new class extends Migration
             $table->double('lat')->nullable();
             $table->boolean('is_public')->default(false);
             $table->string('color')->default("Red");
+            $table->string('image_path')->nullable();
             $table->timestamps();
         });
     }

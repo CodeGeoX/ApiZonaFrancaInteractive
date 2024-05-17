@@ -12,7 +12,10 @@ class MapController extends Controller
         $pointsOfInterest = Places_of_Interest::all();
         return view('index', compact('pointsOfInterest'));
     }
-
+    public function dashboard()
+    {
+        return view('dashboard');
+    }
     public function editPoint(Request $request, $id)
     {
         $point = Places_of_Interest::find($id);

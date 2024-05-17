@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Places_of_Interest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PlacesofInterestController extends Controller
 {
@@ -14,14 +15,15 @@ class PlacesofInterestController extends Controller
             'description' => 'required',
             'long' => 'required',
             'lat' => 'required',
-            'color' => 'required',  // Validación del campo color
+            'color' => 'required',  
+            'image' => 'nullable|string', 
         ]);
         
         try {
             $user = $request->user(); 
             $isPublic = $user->role === 'admin';  
 
-            $placesofinterest = Places_of_Interest::create([
+            $data = [
                 'user_id' => $user->id,
                 'title' => $request['title'],
                 'description' => $request['description'],
@@ -29,11 +31,21 @@ class PlacesofInterestController extends Controller
                 'lat' => $request['lat'],
                 'is_public' => $isPublic,
                 'color' => $request['color'],  
-            ]);
+            ];
+            
+            if ($request->has('image')) {
+                $imageData = $request->input('image');
+                $image = base64_decode($imageData);
+                $imageName = uniqid() . '.jpg';
+                Storage::put('public/images/' . $imageName, $image);
+                $data['image_path'] = 'storage/images/' . $imageName;
+            }
+            $point = Places_of_Interest::create($data);
 
             return response()->json([
                 'status' => 'ok',
-                'return' => $placesofinterest,
+                'return' => $point,
+                'id' => $point->id
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
@@ -118,4 +130,28 @@ class PlacesofInterestController extends Controller
             ], 500);
         }
     }
+
+    public function showPoint($id)
+{
+    try {
+        $point = Places_of_Interest::findOrFail($id);
+
+        if ($point->image_path) {
+            $point->image_path = url($point->image_path);
+        }
+
+        return response()->json([
+            'status' => 'ok',
+            'data' => $point,
+        ], 200);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Punto de interés no encontrado.',
+            'error' => $e->getMessage(),
+        ], 404);
+    }
+}
+
+
 }
