@@ -19,6 +19,7 @@ return new class extends Migration
             $table->double('long')->nullable();
             $table->double('lat')->nullable();
             $table->boolean('is_public')->default(false);
+            $table->string('color')->default("Red");
             $table->timestamps();
         });
     }

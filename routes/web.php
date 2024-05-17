@@ -14,6 +14,8 @@ use App\Http\Controllers\MapController;
 |
 */
 Route::get('/map', [MapController::class, 'index']);
+Route::post('/editPoint/{id}', [MapController::class, 'editPoint']);
+Route::delete('/deletePoint/{id}', [MapController::class, 'deletePoint']);
 
 Route::get('/', function () {
     return view('welcome');
