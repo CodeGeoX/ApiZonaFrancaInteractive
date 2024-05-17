@@ -27,8 +27,17 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2G0516RzxWaUzStSnr92YtbZUDUH_aJw&callback=initMap" async defer></script>
 
 </head>
-<body>
-    <h1>Map of Points of Interest</h1>
-    <div id="map" style="height: 500px;"></div>
-</body>
+
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            Map of Points of Interest            
+        </h2>
+    </x-slot>
+    
+    <div class="container flex justify-center ">
+        <div id="map" style="height: 700px; width: 1200px; margin-left: 20%; margin-top: 2%"></div>
+    </div>
+</x-app-layout>
+
 </html>
