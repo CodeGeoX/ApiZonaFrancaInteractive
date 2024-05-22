@@ -19,6 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::get('/map', [MapController::class, 'index'])->name('map');
 
 
