@@ -4,65 +4,79 @@ namespace App\Http\Controllers;
 
 use App\Models\Places_of_Interest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PlacesofInterestController extends Controller
 {
     public function createPoint(Request $request)
-{
-    $request->validate([
-        'title' => 'required',
-        'description' => 'required',
-        'long' => 'required',
-        'lat' => 'required',
-    ]);
-    
-    try {
-        $user = $request->user(); 
-        $isPublic = $user->role === 'admin';  
-
-        $placesofinterest = Places_of_Interest::create([
-            'user_id' => $user->id,
-            'title' => $request['title'],
-            'description' => $request['description'],
-            'long' => $request['long'],
-            'lat' => $request['lat'],
-            'is_public' => $isPublic 
+    {
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'long' => 'required',
+            'lat' => 'required',
+            'color' => 'required',  
+            'image' => 'nullable|string', 
         ]);
-
-        return response()->json([
-            'status' => 'ok',
-            'return' => $placesofinterest,
-        ], 200);
-    } catch (\Exception $e) {
-        return response()->json([
-            'status' => 'error',
-            'message' => 'Error al registrar el punto de interés.',
-            'error' => $e->getMessage(),
-        ], 500);
-    }
-}
-
-public function getUserPoints(Request $request)
-{
-    try {
-        $user = $request->user();
         
-        $placesofinterest = Places_of_Interest::where('user_id', $user->id)
-                           ->orWhere('is_public', true)  
-                           ->get(); 
+        try {
+            $user = $request->user(); 
+            $isPublic = $user->role === 'admin';  
 
-        return response()->json([
-            'status' => 'ok',
-            'data' => $placesofinterest,
-        ], 200);
-    } catch (\Exception $e) {
-        return response()->json([
-            'status' => 'error',
-            'message' => 'Error al obtener los puntos de interés.',
-            'error' => $e->getMessage(),
-        ], 500);
+            $data = [
+                'user_id' => $user->id,
+                'title' => $request['title'],
+                'description' => $request['description'],
+                'long' => $request['long'],
+                'lat' => $request['lat'],
+                'is_public' => $isPublic,
+                'color' => $request['color'],  
+            ];
+            
+            if ($request->has('image')) {
+                $imageData = $request->input('image');
+                $image = base64_decode($imageData);
+                $imageName = uniqid() . '.jpg';
+                Storage::put('public/images/' . $imageName, $image);
+                $data['image_path'] = 'storage/images/' . $imageName;
+            }
+            $point = Places_of_Interest::create($data);
+
+            return response()->json([
+                'status' => 'ok',
+                'return' => $point,
+                'id' => $point->id
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Error al registrar el punto de interés.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
-}    
+
+    public function getUserPoints(Request $request)
+    {
+        try {
+            $user = $request->user();
+            
+            $placesofinterest = Places_of_Interest::where('user_id', $user->id)
+                               ->orWhere('is_public', true)  
+                               ->get(); 
+    
+            return response()->json([
+                'status' => 'ok',
+                'data' => $placesofinterest,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Error al obtener los puntos de interés.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
     public function deletePoint(Request $request, $id)
     {
         try {
@@ -94,10 +108,13 @@ public function getUserPoints(Request $request)
             $request->validate([
                 'title' => 'required',
                 'description' => 'required',
+                'color' => 'required',  
             ]);
+
             $place->update([
                 'title' => $request['title'],
                 'description' => $request['description'],
+                'color' => $request['color'],  
             ]);
 
             return response()->json([
@@ -113,4 +130,28 @@ public function getUserPoints(Request $request)
             ], 500);
         }
     }
+
+    public function showPoint($id)
+{
+    try {
+        $point = Places_of_Interest::findOrFail($id);
+
+        if ($point->image_path) {
+            $point->image_path = url($point->image_path);
+        }
+
+        return response()->json([
+            'status' => 'ok',
+            'data' => $point,
+        ], 200);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Punto de interés no encontrado.',
+            'error' => $e->getMessage(),
+        ], 404);
+    }
+}
+
+
 }

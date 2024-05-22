@@ -55,6 +55,7 @@
                         </div>
                     </div>
 
+
                     <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6">
                         <div class="p-6 flex">
                             <div class="w-1/3">
@@ -93,6 +94,7 @@
                         hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
                     }]
                 },
+
                 options: {
                     responsive: true,
                     plugins: {
