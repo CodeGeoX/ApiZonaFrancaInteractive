@@ -19,6 +19,7 @@
             // Verifica si el JSON se genera correctamente
             var pointsOfInterest = @json($pointsOfInterest);
             console.log('Puntos de interés:', pointsOfInterest);
+            
 
             pointsOfInterest.forEach(function(point) {
                 var position = new google.maps.LatLng(parseFloat(point.latitude), parseFloat(point.longitude));
