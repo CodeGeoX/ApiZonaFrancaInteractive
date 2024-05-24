@@ -12,57 +12,56 @@
     <x-app-layout>
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                {{ __('Dashboard') }}
+                {{ __('Puntos de Interés') }}
             </h2>
         </x-slot>
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex">
                 <!-- Divs with Company Information -->
-                <div class="w-2/3">
-                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6">
-                        <div class="p-6 flex">
-                            <div class="w-1/3">
-                                <img src="{{ asset('images/dfactory.jpg') }}" alt="DFactory" class="w-full h-auto">
+                <div class="w-full">
+                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6 h-64">
+                        <div class="p-6 flex h-full">
+                            <div class="w-1/2">
+                                <img src="{{ asset('images/dfactory.jpg') }}" alt="DFactory" class="w-full h-full object-cover">
                             </div>
-                            <div class="w-2/3 pl-6 text-white">
+                            <div class="w-1/2 pl-6 text-white flex flex-col justify-center">
                                 <h3 class="text-lg font-semibold">DFactory</h3>
                                 <p>DFactory es una entidad innovadora dedicada a fomentar la digitalización y la transformación industrial mediante la integración de tecnologías avanzadas.</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6">
-                        <div class="p-6 flex">
-                            <div class="w-1/3">
-                                <img src="{{ asset('images/3dfactory.jpg') }}" alt="3DFactory" class="w-full h-auto">
+                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6 h-64">
+                        <div class="p-6 flex h-full">
+                            <div class="w-1/2">
+                                <img src="{{ asset('images/3dfactory.jpg') }}" alt="3DFactory" class="w-full h-full object-cover">
                             </div>
-                            <div class="w-2/3 pl-6 text-white">
+                            <div class="w-1/2 pl-6 text-white flex flex-col justify-center">
                                 <h3 class="text-lg font-semibold">3DFactory</h3>
                                 <p>3DFactory es un centro de excelencia que se especializa en la fabricación aditiva, proporcionando soluciones de impresión 3D a diversas industrias.</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6">
-                        <div class="p-6 flex">
-                            <div class="w-1/3">
-                                <img src="{{ asset('images/incubadora.jpeg') }}" alt="Incubadora logística 4.0" class="w-full h-auto">
+                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6 h-64">
+                        <div class="p-6 flex h-full">
+                            <div class="w-1/2">
+                                <img src="{{ asset('images/incubadora.jpeg') }}" alt="Incubadora logística 4.0" class="w-full h-full object-cover">
                             </div>
-                            <div class="w-2/3 pl-6 text-white">
+                            <div class="w-1/2 pl-6 text-white flex flex-col justify-center">
                                 <h3 class="text-lg font-semibold">Incubadora logística 4.0</h3>
                                 <p>La Incubadora logística 4.0 apoya a startups y empresas emergentes en la creación de soluciones logísticas innovadoras utilizando tecnologías de la Industria 4.0.</p>
                             </div>
                         </div>
                     </div>
 
-
-                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6">
-                        <div class="p-6 flex">
-                            <div class="w-1/3">
-                                <img src="{{ asset('images/newpostbarcelona.png') }}" alt="New Post Barcelona" class="w-full h-auto">
+                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6 h-64">
+                        <div class="p-6 flex h-full">
+                            <div class="w-1/2">
+                                <img src="{{ asset('images/newpostbarcelona.png') }}" alt="New Post Barcelona" class="w-full h-full object-cover">
                             </div>
-                            <div class="w-2/3 pl-6 text-white">
+                            <div class="w-1/2 pl-6 text-white flex flex-col justify-center">
                                 <h3 class="text-lg font-semibold">New Post Barcelona</h3>
                                 <p>New Post Barcelona es una iniciativa que promueve el desarrollo de nuevas tecnologías y servicios en el ámbito postal y logístico en la ciudad de Barcelona.</p>
                             </div>
@@ -70,14 +69,6 @@
                     </div>
                 </div>
 
-                <!-- Pie Chart Section -->
-                <div class="w-1/3 pl-6">
-                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6 p-6 text-white">
-                        <canvas id="myPieChart"></canvas>
-                        <h3 class="text-lg font-semibold mt-4">La zona franca</h3>
-                        <p>Es un territorio delimitado de un país donde se goza de algunos beneficios tributarios, como la exención del pago de derechos de importación de mercancías, así como exoneraciones de algunos impuestos o una regulación diferente de estos.</p>
-                    </div>
-                </div>
             </div>
         </div>
     </x-app-layout>

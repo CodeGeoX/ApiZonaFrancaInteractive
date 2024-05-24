@@ -24,6 +24,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/zonafranca', function () {
+    return view('zonafranca.show');
+})->name('zonafranca.show');
 
 Route::get('/map', [MapController::class, 'index'])->name('map');
 
