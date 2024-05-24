@@ -32,6 +32,7 @@
             });
 
             map.fitBounds(bounds);
+            
 
             // Agregar evento de clic a los edificios del dashboard
             document.addEventListener('DOMContentLoaded', function () {
