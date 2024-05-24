@@ -82,9 +82,18 @@
         }
     </script>
     <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2G0516RzxWaUzStSnr92YtbZUDUH_aJw&callback=initMap"></script>
-</head>
-<body>
-    <h1>Map of Points of Interest</h1>
-    <div id="map" style="height: 500px; width: 100%;"></div>
-</body>
+    </head>
+        <body class="bg-gray-100 dark:bg-gray-900">
+            <x-app-layout>
+                <x-slot name="header">
+                    <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                        Map of Points of Interest
+                    </h2>
+                </x-slot>
+
+                <div class="container flex justify-center">
+                    <div id="map" style="height: 700px; width: 1200px;  margin-top: 2%"></div>
+                </div>
+            </x-app-layout>
+        </body>
 </html>
