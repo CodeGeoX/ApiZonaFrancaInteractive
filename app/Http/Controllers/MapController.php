@@ -40,4 +40,21 @@ class MapController extends Controller
 
         return response()->json(['success' => false]);
     }
+
+    public function addPoint(Request $request)
+    {
+        $point = new Places_of_Interest();
+        $point->title = $request->title;
+        $point->description = $request->description;
+        $point->lat = $request->lat;
+        $point->long = $request->long;
+        $point->color = "red";
+        $point->image_path = "image1";
+        $point->is_public = 1;
+        $point->user_id = 2;
+
+        $point->save();
+
+        return response()->json(['success' => true]);
+    }
 }

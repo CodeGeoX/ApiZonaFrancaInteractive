@@ -19,6 +19,7 @@ Route::get('/map', [MapController::class, 'index'])->name('map');
 Route::post('/editPoint/{id}', [MapController::class, 'editPoint']);
 Route::delete('/deletePoint/{id}', [MapController::class, 'deletePoint']);
 Route::get('/dashboard', [MapController::class, 'dashboard']);
+Route::post('/addPoint', [MapController::class, 'addPoint'])->name('addPoint');
 
 Route::get('/', function () {
     return view('dashboard');
