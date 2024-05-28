@@ -16,6 +16,18 @@
                         {{ __('Mapa') }}
                     </x-responsive-nav-link>
                 </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex items-center">
+                <x-responsive-nav-link :href="route('zonafranca.show')" :active="request()->routeIs('zonafranca.show')">
+                        {{ __('Zona Franca') }}
+                    </x-responsive-nav-link>
+
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex items-center">
+                <x-responsive-nav-link :href="route('info')" :active="request()->routeIs('info')">
+                        {{ __('Información') }}
+                    </x-responsive-nav-link>
+                </div>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->

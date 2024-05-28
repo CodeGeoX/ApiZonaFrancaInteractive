@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class MapController extends Controller
 {
+
+    public function info()
+    {
+        $pointsOfInterest = Places_of_Interest::all();
+        return view('info', compact('pointsOfInterest'));
+    }
+
     public function index()
     {
         $pointsOfInterest = Places_of_Interest::all();
